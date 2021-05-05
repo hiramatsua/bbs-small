@@ -1,4 +1,4 @@
-<!-- edit -->
+<!-- remove -->
 @extends('layout')
 
 @section('content')
@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col col-md-offset-3 col-md-6">
                 <nav class="panel panel-default">
-                    <div class="panel-heading">投稿の編集</div>
+                    <div class="panel-heading">投稿の削除</div>
                     <div class="panel-body">
                         <!-- エラー表示 -->
                         @if($errors->any())
@@ -16,25 +16,23 @@
                                 @endforeach
                             </div>
                         @endif
-                        <form action="{{ route('edit', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('remove', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="number">No.</label>
                                 <span>{{ $item->id }}</span>
                             </div>
-                            <input type="hidden" name="user_id" value="{{ $item->user_id }}">
-                            <input type="hidden" name="author" value="{{ $item->author }}">
-
+                            
                             <div class="form-group">
                                 <label for="title">タイトル</label>
-                                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') ?? $item->title }}">
+                                <p>{{ $item->title }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="body">本文</label>
-                                <textarea rows="4" cols="50" class="form-control" name="body" id="body">{{ old('body') ??$item->body }}</textarea>
+                                <p>{{ $item->body }}</p>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-edit"></i> 編集する</button>
+                                <button type="submit" class="btn btn-danger">削除する</button>
                             </div>
                         </form>
                     </div>
