@@ -29,16 +29,31 @@ class BbsEntryController extends Controller
         // post すべてのパラメータを受取
         $form = $request->all();
         unset($form['_token']);
-
         // DB保存
         $bbsEntry->fill($form)->save();
-
         // 投稿後、最新投稿一覧を取得して、一覧画面を表示
         return redirect('home')->with('message', '投稿しました。');
 	}
 
-    public function showCreateForm()
+    public function showEditForm(int $id)
     {
-        return view('bbs_entry_form');
+        $item = BbsEntry::find($id);
+
+        return view('edit', [
+            'item' => $item,
+        ]);
+    }
+
+    public function edit(int $id, CreateBbs $request)
+    {
+        $bbsEdit = BbsEntry::find($id);
+
+        $editForm = $request->all();
+        unset($editForm['_token']);
+
+        // DB更新
+        $bbsEdit->fill($editForm)->save();
+        // 投稿編集後、最新投稿一覧を取得して、一覧画面を表示
+        return redirect('home')->with('message', '投稿を編集しました。');
     }
 }
