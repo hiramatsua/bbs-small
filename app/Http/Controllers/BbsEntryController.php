@@ -56,4 +56,20 @@ class BbsEntryController extends Controller
         // 投稿編集後、最新投稿一覧を取得して、一覧画面を表示
         return redirect('home')->with('message', '投稿を編集しました。');
     }
+
+    public function showRemoveForm(int $id)
+    {
+        $item = BbsEntry::find($id);
+
+        return view('remove', [
+            'item' => $item,
+        ]);
+    }
+
+    public function remove(int $id)
+    {
+        BbsEntry::where('id', '=',$id)->delete();
+
+        return redirect('home')->with('message', '投稿を削除しました。');
+    }
 }

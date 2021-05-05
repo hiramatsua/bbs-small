@@ -5,15 +5,15 @@
         <div class="row">
             <div class="column col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">投稿一覧</div>
+                    <div class="panel-heading"><i class="fa fa-btn fa-list"></i> 投稿一覧</div>
                     @if (session('message'))
                         <div class="alert alert-success mt-4 mb-4">
                             {{ session('message') }}
                         </div>
                     @endif
-                    <div class="text-center" style="padding-top:7px;">
+                    <div class="text-center" style="padding-top:5px;">
                         <a href="{{ route('create') }}" class="btn btn-primary">
-                            投稿する</a>
+                            <i class="fa fa-btn fa-pencil"></i> 投稿する</a>
                     </div>
                     <table class="table">
                         <thead>
@@ -33,10 +33,10 @@
                                     <td>{{ $list->author }}</td>
                                     <td>{{ $list->body }}</td>
                                     <td>
-                                        <a href="{{ route('edit', ['id' => $list->id]) }}">
-                                            編集</a>
-                                        <a href="{{ route('remove', ['id' => $list->id]) }}">
-                                            削除</a>
+                                        <a href="{{ route('edit', ['id' => $list->id]) }}" class="btn btn-primary">
+                                            <i class="fa fa-btn fa-edit"></i> 編集</a>
+                                        <a href="{{ route('remove', ['id' => $list->id]) }}" class="btn btn-danger">
+                                            <i class="fa fa-btn fa-trash"></i> 削除</a>
                                     </td>
                                 </tr>
                             @endforeach
