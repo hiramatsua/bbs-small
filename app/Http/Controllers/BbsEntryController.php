@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateBbs;
 use App\Models\BbsEntry;
 
 class BbsEntryController extends Controller
@@ -21,8 +22,23 @@ class BbsEntryController extends Controller
         return view('bbs_entry_form');
     }
 
-	function create(){
+	function create(CreateBbs $request){
 		//@TODO 投稿処理を行う
-		echo "create";
+        $bbsEntry = new BbsEntry;   // BbsEntryモデルのインスタンス作成
+
+        // post すべてのパラメータを受取
+        $form = $request->all();
+        unset($form['_token']);
+
+        // DB保存
+        $bbsEntry->fill($form)->save();
+
+        // 投稿後、最新投稿一覧を取得して、一覧画面を表示
+        return redirect('home')->with('message', '投稿しました。');
 	}
+
+    public function showCreateForm()
+    {
+        return view('bbs_entry_form');
+    }
 }

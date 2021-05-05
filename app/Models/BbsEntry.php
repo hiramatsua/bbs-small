@@ -10,4 +10,11 @@ class BbsEntry extends Model
     use HasFactory;
 
     protected $table = "bbs_entry";
+
+    protected $fillable = [
+        'title',
+        'user_id',
+        'author',
+        'body',
+    ];
 }

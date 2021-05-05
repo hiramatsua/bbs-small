@@ -6,10 +6,14 @@
             <div class="column col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">投稿一覧</div>
-                        <div class="text-right">
-                            <a href="{{ route('create') }}" class="btn btn-default btn-block">
-                                投稿する</a>
+                    @if (session('message'))
+                        <div class="alert alert-success mt-4 mb-4">
+                            {{ session('message') }}
                         </div>
+                    @endif
+                    <div class="text-center" style="padding-top:7px;">
+                        <a href="{{ route('create') }}" class="btn btn-primary">
+                            投稿する</a>
                     </div>
                     <table class="table">
                         <thead>
