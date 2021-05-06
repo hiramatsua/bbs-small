@@ -12,7 +12,8 @@ class BbsEntryController extends Controller
 		//@TODO 投稿一覧画面を表示
         // $lists = BbsEntry::all();
         // 新しい投稿から表示させるように変更 20210506-A
-		$lists = BbsEntry::orderBy("updated_at", "desc")->get();
+        // ページング追加 20210506-C
+		$lists = BbsEntry::orderBy("updated_at", "desc")->paginate(10);
 
         return view('bbs_entry_list', [
             'lists' => $lists,
