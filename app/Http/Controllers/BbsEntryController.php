@@ -10,20 +10,24 @@ class BbsEntryController extends Controller
 {
     function index(){
 		//@TODO 投稿一覧画面を表示
-		$lists = BbsEntry::all();
+        // $lists = BbsEntry::all();
+        // 新しい投稿から表示させるように変更 20210506-A
+		$lists = BbsEntry::orderBy("updated_at", "desc")->get();
 
         return view('bbs_entry_list', [
             'lists' => $lists,
         ]);
 	}
 
+    // 投稿の新規登録フォーム
     public function showCreateForm()
     {
         return view('bbs_entry_form');
     }
 
-	function create(CreateBbs $request){
-		//@TODO 投稿処理を行う
+    // 投稿の新規登録処理
+    public function create(CreateBbs $request)
+    {
         $bbsEntry = new BbsEntry;   // BbsEntryモデルのインスタンス作成
 
         // post すべてのパラメータを受取
@@ -35,6 +39,7 @@ class BbsEntryController extends Controller
         return redirect('home')->with('message', '投稿しました。');
 	}
 
+    // 投稿の編集フォーム
     public function showEditForm(int $id)
     {
         $item = BbsEntry::find($id);
@@ -44,6 +49,7 @@ class BbsEntryController extends Controller
         ]);
     }
 
+    // 投稿の編集処理
     public function edit(int $id, CreateBbs $request)
     {
         $bbsEdit = BbsEntry::find($id);
@@ -57,6 +63,7 @@ class BbsEntryController extends Controller
         return redirect('home')->with('message', '投稿を編集しました。');
     }
 
+    // 投稿の削除フォーム
     public function showRemoveForm(int $id)
     {
         $item = BbsEntry::find($id);
@@ -66,6 +73,7 @@ class BbsEntryController extends Controller
         ]);
     }
 
+    // 投稿の削除処理
     public function remove(int $id)
     {
         BbsEntry::where('id', '=',$id)->delete();
