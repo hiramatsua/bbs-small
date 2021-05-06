@@ -18,20 +18,20 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="50">No.</th>
                                 <th width="150">タイトル</th>
                                 <th width="150">投稿者名</th>
-                                <th width="600">本文</th>
+                                <th width="450">本文</th>
+                                <th width="200">投稿日時</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($lists as $list)
                                 <tr>
-                                    <td>{{ $list->id }}</td>
                                     <td>{{ $list->title }}</td>
                                     <td>{{ $list->author }}</td>
                                     <td>{{ $list->body }}</td>
+                                    <td>{{ $list->updated_at }}</td>
                                     <td>
                                         <a href="{{ route('edit', ['id' => $list->id]) }}" class="btn btn-primary">
                                             <i class="fa fa-btn fa-edit"></i> 編集</a>
