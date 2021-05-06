@@ -22,7 +22,7 @@
                                 <label for="number">No.</label>
                                 <span>{{ $item->id }}</span>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="title">タイトル</label>
                                 <p>{{ $item->title }}</p>
@@ -32,7 +32,7 @@
                                 <p>{{ $item->body }}</p>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-danger">削除する</button>
+                                <button type="submit" class="btn btn-danger" onclick='return confirm("本当に削除してもよろしいですか？");'>削除する</button>
                             </div>
                         </form>
                     </div>
