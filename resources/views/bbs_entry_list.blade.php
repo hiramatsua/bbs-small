@@ -11,7 +11,7 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                    <div class="text-center" style="padding-top:5px;">
+                    <div class="text-center" style="padding-top:4px;">
                         <a href="{{ route('create') }}" class="btn btn-primary">
                             <i class="fa fa-btn fa-pencil"></i> 投稿する</a>
                     </div>
@@ -40,6 +40,9 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @if(count($lists) < 1)
+                                <p>投稿がありません</p>
+                            @endif
                         </tbody>
                     </table>
                 </div>
