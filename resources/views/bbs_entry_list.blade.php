@@ -6,11 +6,18 @@
             <div class="column col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-btn fa-list"></i> 投稿一覧</div>
-                    @if (session('message'))
+                    <!-- Flashメッセージ -->
+                    @if (session('success'))
                         <div class="alert alert-success mt-4 mb-4">
-                            {{ session('message') }}
+                            {{ session('success') }}
                         </div>
                     @endif
+                    @if (session('danger'))
+                        <div class="alert alert-danger mt-4 mb-4">
+                            {{ session('danger') }}
+                        </div>
+                    @endif
+                    <!-- ここまで -->
                     <div class="text-center" style="padding-top:2px;">
                         <a href="{{ route('create') }}" class="btn btn-primary">
                             <i class="fa fa-btn fa-pencil"></i> 投稿する</a>

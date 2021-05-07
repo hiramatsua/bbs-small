@@ -37,7 +37,7 @@ class BbsEntryController extends Controller
         // DB保存
         $bbsEntry->fill($form)->save();
         // 投稿後、最新投稿一覧を取得して、一覧画面を表示
-        return redirect('home')->with('message', '投稿しました。');
+        return redirect('home')->with('sucess', '投稿しました。');
 	}
 
     // 投稿の編集フォーム
@@ -45,6 +45,9 @@ class BbsEntryController extends Controller
     {
         $item = BbsEntry::find($id);
 
+        if (auth()->user()->id != $item->user_id) {
+            return redirect(route('home'))->with('danger', '許可されていない操作です');
+        }
         return view('edit', [
             'item' => $item,
         ]);
@@ -61,7 +64,7 @@ class BbsEntryController extends Controller
         // DB更新
         $bbsEdit->fill($editForm)->save();
         // 投稿編集後、最新投稿一覧を取得して、一覧画面を表示
-        return redirect('home')->with('message', '投稿を編集しました。');
+        return redirect('home')->with('success', '投稿を編集しました。');
     }
 
     // 投稿の削除フォーム
@@ -79,6 +82,6 @@ class BbsEntryController extends Controller
     {
         BbsEntry::where('id', '=',$id)->delete();
 
-        return redirect('home')->with('message', '投稿を削除しました。');
+        return redirect('home')->with('danger', '投稿を削除しました。');
     }
 }
