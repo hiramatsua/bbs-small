@@ -17,16 +17,19 @@ use App\Http\Controllers\BbsEntryController;
 //     return view('welcome');
 // });
 
-Auth::routes();
+Route::group(['middleware' => 'auth'], function() {
+    // 投稿一覧　ホーム画面
+    Route::get('/home', [BbsEntryController::class, 'index'])->name('home');
+    // 投稿登録
+    Route::get('/create', [BbsEntryController::class, 'showCreateForm'])->name('create');
+    Route::post('/create', [BbsEntryController::class, 'create']);
+    // 投稿編集
+    Route::get('/edit/{id}', [BbsEntryController::class, 'showEditForm'])->name('edit');
+    Route::post('/edit/{id}', [BbsEntryController::class, 'edit']);
+    // 投稿削除
+    Route::get('/remove/{id}', [BbsEntryController::class, 'showRemoveForm'])->name('remove');
+    Route::post('/remove/{id}', [BbsEntryController::class, 'remove']);
+});
 
-// 投稿一覧
-Route::get('/home', [BbsEntryController::class, 'index'])->name('home');
-// 投稿登録
-Route::get('/create', [BbsEntryController::class, 'showCreateForm'])->name('create');
-Route::post('/create', [BbsEntryController::class, 'create']);
-// 投稿編集
-Route::get('/edit/{id}', [BbsEntryController::class, 'showEditForm'])->name('edit');
-Route::post('/edit/{id}', [BbsEntryController::class, 'edit']);
-// 投稿削除
-Route::get('/remove/{id}', [BbsEntryController::class, 'showRemoveForm'])->name('remove');
-Route::post('/remove/{id}', [BbsEntryController::class, 'remove']);
+// Auth機能のルーティング
+Auth::routes();
